@@ -1,0 +1,50 @@
+version: "3"
+
+volumes:
+  postgres-db:
+
+services:
+  postgres:
+    image: postgres:alpine
+    container_name: workshop-customer-platform-postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres-db:/var/lib/postgresql/data/
+
+  django:
+    build: .
+    container_name: workshop-customer-platform-django
+    ports:
+      - 8000:8000
+    environment:
+      - SECRET_KEY=${DJ_SECRET_KEY:-secret}
+      - DEBUG=True
+      - ALLOWED_HOSTS=${DJ_ALLOWED_HOSTS:-*}
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - KAFKA_HOST=${KAFKA_HOST:-localhost:9200}
+
+      - WAIT_HOSTS=postgres:5432
+      - WAIT_HOSTS_TIMEOUT=100
+      - WAIT_SLEEP_INTERVAL=5
+      - WAIT_HOST_CONNECT_TIMEOUT=5
+    depends_on:
+      - postgres
+    command:
+      - sh
+      - -c
+      - |
+        ./../wait
+        python manage.py migrate
+        python manage.py collectstatic --noinput
+        gunicorn --bind 0.0.0.0:8000 config.wsgi:application 
+    volumes:
+      - ./app:/app

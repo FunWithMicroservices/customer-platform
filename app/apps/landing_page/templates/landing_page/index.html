@@ -1,0 +1,308 @@
+{% extends 'wrapper/index.html' %}
+
+{% block css %}
+
+<style>
+    .hero.is-large .hero-body {
+        padding-bottom: 0;
+        padding-top: 10rem;
+    }
+    .hero figure {
+        height: 0;
+        padding-bottom: 75%;
+        overflow: hidden;
+    }
+    figure.image {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+    .bg-white {
+        background-color: #ffffff;
+    }
+    .bg-light {
+        background-color: #faf6fb;
+    }
+    .media-left {
+        padding-left: 15px;
+    }
+    .media-left .icon {
+        margin-top: 15px;
+
+    }
+
+    .media-content {
+        padding-left: 25px;
+    }
+
+    .media {
+        background-color: #ffffff;
+        padding: 25px;
+    }
+
+    .section {
+        padding: 7rem 5rem;
+    }
+
+    .content h1 {
+        margin-bottom: 2em;
+    }
+
+    #stn-download {
+        color: #ffffff;
+        background-image: linear-gradient( 135deg, rgba(60, 8, 118, 0.8) 0%, rgba(250, 0, 118, 0.8) 100%);
+    }
+
+    .hero.is-landing {
+        color: #ffffff;
+        background-image: linear-gradient( 135deg, rgba(60, 8, 118, 0.8) 0%, rgba(250, 0, 118, 0.8) 100%);
+    }
+
+    .hero.is-landing * {
+        color: #ffffff;
+    }
+
+    #stn-download h1 {
+        color: #ffffff;
+    }
+
+    .button.button-store {
+        border-radius: 3px;
+        background: #FFF;
+        box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.26);
+        font-size: 14px;
+        font-weight: 500;
+        color: #633991;
+        margin: 0.5rem;
+        padding: 0.7rem 1.6rem;
+        line-height: 1.8;
+        height: auto;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+
+        display: inline-block;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+
+    .button.button-store:hover {
+        color: #000000;
+        background-color: #faf6fb;
+    }
+
+    .button.button-store img {
+        margin-right: 0.4rem;
+        vertical-align: text-bottom;
+    }
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+
+<div class="content-wrapper">
+
+    <section class="hero is-landing is-large">
+
+        <div class="hero-body">
+            <div class="container has-text-centered">
+
+                <div class="columns">
+                    <div class="column is-6 is-offset-3">
+                        <h1 class="title is-1">
+                            Ailio Car Insurance
+                        </h1>
+                        <h2 class="subtitle is-4">
+                            Smart insurance for your Car
+                        </h2>
+
+                        <figure class="image">
+                            <img src="img/iphonex.png" alt="" width="768">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="bg-light">
+        <div class="container section">
+            <div class="content has-text-centered">
+                <h1>Features you love</h1>
+            </div>
+
+            <nav class="columns">
+                <div class="column has-text-centered">
+                    <article class="media">
+                        <figure class="media-left">
+                            <span class="icon has-text-danger">
+                                <i class="fas fa-shield-alt fa-3x"></i>
+                            </span>
+                        </figure>
+                        <div class="media-content">
+                            <div class="content">
+                                <h4 class="heading"><strong>Fully Comprehensive</strong></h4>
+                                <p>With a low deductible to maximum protection. Uncomplicated, fast and everywhere.</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="column has-text-centered">
+                    <article class="media">
+                        <figure class="media-left">
+                            <span class="icon has-text-danger">
+                                <i class="fas fa-hand-holding-usd fa-3x"></i>
+                            </span>
+                        </figure>
+                        <div class="media-content">
+                            <div class="content">
+                                <h4 class="heading"><strong>Low Costs</strong></h4>
+                                <p>We are value for money and innovative. We get to know our customers quickly and assess them realistically.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="column has-text-centered">
+                    <article class="media">
+                        <figure class="media-left">
+                            <span class="icon has-text-danger">
+                                <i class="fas fa-brain fa-3x"></i>
+                            </span>
+                        </figure>
+                        <div class="media-content">
+                            <div class="content">
+                                    <h4 class="heading"><strong>Smart</strong></h4>
+                                    <p>Our innovative ki system automatically detects your driving style and hazardous situations.</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </nav>
+        </div>
+    </section>
+
+    <section class="bg-white">
+        <div class="container section">
+            <div class="columns is-vcentered">
+                <div class="column">
+                    <figure class="image">
+                        <img src="img/iphonex.png" alt="">
+                    </figure>
+                </div>
+                <div class="column ">
+                        <div class="content">
+                            <h1>For Any car</h1>
+                            <p>
+                                All you need is a mobile with our app installed.
+                                Your monthly rate is based on your driving behavior.
+                                Our smart systems are able to have a track on that
+                                and ensures a maximum of dafetiness for you.
+                            </p>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-light">
+        <div class="container section">
+            <div class="content has-text-centered">
+                <h1>Frequently Ask Questions</h1>
+            </div>
+
+            <div class="columns">
+                <div class="column is-half">
+                    <div class="title is-4">How long is the notice period?</div>
+                    <p>You may terminate the contract at the end of the insurance year. The termination is only effective if it is received at least one month before expiry.</p>
+                </div>
+
+                <div class="column is-half">
+                    <div class="title is-4">What do the no-claims classes mean?</div>
+                    <p>
+                        The more years you get through everyday life without any claims, the cheaper your car insurance becomes and the more money you save. If you have an accident, you move into a lower and therefore more expensive no-claims class - and your premium increases. So the more carefully you drive, the more it pays off for you. More importantly, the less you and other road users are harmed.
+                    </p>
+                </div>
+            </div>
+
+            <div class="columns">
+                <div class="column is-half">
+                    <div class="title is-4">What is the difference between fully comprehensive and partially comprehensive insurance</div>
+                    <p>Sounds complicated, but it is quite simple:
+                        Liability insurance pays for all damage caused to other vehicles and people, plus financial losses. In addition, we clarify the question of guilt for you and defend against unjustified claims.
+                        Partial comprehensive insurance, on the other hand, pays for damage to your own vehicle such as: Theft, natural forces such as storm, hail or lightning, collision with animals of all kinds, glass breakage and repair, animal bites, damage caused by short circuits and much more. Details can be found in our overview of benefits.
+                        The fully comprehensive insurance additionally covers all damages to your own car caused by self-inflicted accidents or vandalism. Fully comprehensive insurance is the best protection for valuable and new vehicles as well as young used cars.
+                    </p>
+                </div>
+
+                <div class="column is-half">
+                    <div class="title is-4">When do the no-claims classes change?</div>
+                    <p>We reclassify each contract at the main due date (January 1 or start of the season) of each year according to its claims history in the previous calendar year. If the contract was free of claims during a calendar year and the insurance coverage was uninterrupted during this time, the contract will be classified in the next better SF class. If the contract has been subject to claims during a calendar year, it will be downgraded according to the respective downgrading table.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <section id="stn-download">
+        <div class="container section has-text-centered">
+            <div class="columns">
+                <div class="column is-half is-offset-one-quarter">
+
+                    <h1 class="title is-2">Contact us</h1>
+                    <form method="post" action="{% url 'contact-form' %}">
+                        {% csrf_token %}
+                        <div class="field">
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input is-danger" type="email" name="email" placeholder="Your Email">
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <div class="select is-fullwidth">
+                                    <select name="type">
+                                        <option value="request-account">Request Account</option>
+                                        <option value="question">Ask Question</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <textarea class="textarea" name="message" placeholder="Your Message"></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="button">Send</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="content has-text-centered">
+                <p>
+                    Web App built with
+                    <span class="icon has-text-danger">
+                        <i class="fas fa-heart"></i>
+                    </span>
+                    by <a href="https://github.com/JangasCodingplace">Jangas Codingplace</a>
+                    @ 2022.
+                </p>
+            </div>
+        </div>
+    </footer>
+</div>
+
+
+{% endblock %}
