@@ -1,4 +1,5 @@
 import json
+import logging
 
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
@@ -10,6 +11,9 @@ from .forms import Contact
 from apps.kafka import producer
 
 
+logger = logging.getLogger(__name__)
+
+
 class LandingPageView(TemplateView):
     template_name = "landing_page/index.html"
 
@@ -17,6 +21,7 @@ class LandingPageView(TemplateView):
 @require_http_methods(["POST", ])
 def contact_view(request):
     form = Contact(request.POST)
+    logger.info("Contactform received")
     if form.is_valid():
         json_message = {
             "type": form.cleaned_data['type'],
@@ -28,5 +33,8 @@ def contact_view(request):
             json.dumps(json_message).encode()
         )
         producer.flush()
+        logger.info(
+            f"Contactform sent to kafka topic `customer-platform-contact-form` with msg {json_message}"
+        )
 
     return HttpResponseRedirect(reverse('landing-page'))

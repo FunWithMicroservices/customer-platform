@@ -1,5 +1,8 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -9,12 +12,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'w37xjc8zgr^ol=cg$xn6l!ig(t@k)yj)keqv0!z3=y@%jf*_5n'
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ["DEBUG"].lower() == "true"
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = os.environ["ALLOWED_HOSTS"].split()
 
 
 # Application definition
@@ -144,3 +147,43 @@ LOGOUT_REDIRECT_URL = "/"
 
 # Todo Make this to env
 KAFKA_HOST = os.getenv("KAFKA_HOST", "localhost:9092")
+
+
+Path.mkdir(BASE_DIR / "logs", exist_ok=True)
+
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "root": {
+        "level": "INFO",
+        "handlers": ["console", "file"]
+    },
+    "handlers": {
+        'console': {
+            'class': 'logging.StreamHandler',
+            "formatter": "app",
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / "logs" / "app.log",
+            "formatter": "app",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console", "file", ],
+            "level": "INFO",
+            "propagate": True
+        },
+    },
+    "formatters": {
+        "app": {
+            "format": (
+                u"%(asctime)s [%(levelname)-8s] "
+                "(%(module)s.%(funcName)s) %(message)s"
+            ),
+            "datefmt": "%Y-%m-%dT%H:%M:%SZ",
+        },
+    },
+}

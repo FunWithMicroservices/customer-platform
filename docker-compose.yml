@@ -3,6 +3,7 @@ version: "3"
 volumes:
   postgres-db:
   django-static:
+  django-log-volume:
 
 services:
   postgres:
@@ -20,23 +21,18 @@ services:
   django:
     build: .
     container_name: workshop-customer-platform-django
+    env_file: ./app/.env
     environment:
-      - SECRET_KEY=${DJ_SECRET_KEY:-secret}
-      - DEBUG=True
-      - ALLOWED_HOSTS=${DJ_ALLOWED_HOSTS:-*}
       - POSTGRES_HOST=postgres
       - POSTGRES_PORT=5432
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - KAFKA_HOST=${KAFKA_HOST:-localhost:9200}
 
       - WAIT_HOSTS=postgres:5432
       - WAIT_HOSTS_TIMEOUT=100
       - WAIT_SLEEP_INTERVAL=5
       - WAIT_HOST_CONNECT_TIMEOUT=5
-    depends_on:
-      - postgres
     command:
       - sh
       - -c
@@ -48,6 +44,9 @@ services:
     volumes:
       - ./app:/app
       - django-static:/app/static
+      - django-log-volume:/app/logs/
+    depends_on:
+      - postgres
 
   nginx:
     image: nginx:1.21-alpine
@@ -69,3 +68,13 @@ services:
     command: -nginx.scrape-uri http://nginx/nginx/metrics
     depends_on:
       - nginx
+
+  filebeat:
+    image: "docker.elastic.co/beats/filebeat:8.1.1"
+    container_name: workshop-customer-platform-filebeat
+    env_file: ./app/.env
+    volumes:
+      - ./elastic/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      - /var/lib/docker:/var/lib/docker:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      - django-log-volume:/logs

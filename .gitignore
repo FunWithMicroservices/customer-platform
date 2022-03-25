@@ -18,3 +18,4 @@ static/
 
 # Docker
 docker-compose.local.yml
+*.log
