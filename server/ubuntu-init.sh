@@ -16,5 +16,5 @@ sudo apt  install docker-compose -y
 sudo ufw allow OpenSSH
 echo "y" | sudo ufw enable
 sudo ufw allow 80
-sudo ufw allow 8000
+sudo ufw allow 9113
 sudo ufw allow 5432
