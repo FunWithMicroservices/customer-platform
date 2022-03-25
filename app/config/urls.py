@@ -1,9 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
 
-from django.conf import settings
-from django.conf.urls.static import static
-
 from django.contrib.auth.views import LoginView, LogoutView
 
 from apps.members import views as member_views
@@ -18,5 +15,6 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name="logout"),
     path('add-car/', member_views.AddCarView.as_view(), name="add-car"),
     path('api/cars/', member_api.CarApiView.as_view(), name="api-get-cars"),
+    path('api/contact-form/', landing_page_views.FormApi.as_view()),
     path("monitoring/", include("django_prometheus.urls")),
 ]
