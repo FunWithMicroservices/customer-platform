@@ -2,6 +2,7 @@ version: "3"
 
 volumes:
   postgres-db:
+  django-static:
 
 services:
   postgres:
@@ -19,8 +20,6 @@ services:
   django:
     build: .
     container_name: workshop-customer-platform-django
-    ports:
-      - 8000:8000
     environment:
       - SECRET_KEY=${DJ_SECRET_KEY:-secret}
       - DEBUG=True
@@ -48,3 +47,25 @@ services:
         gunicorn --bind 0.0.0.0:8000 config.wsgi:application 
     volumes:
       - ./app:/app
+      - django-static:/app/static
+
+  nginx:
+    image: nginx:1.21-alpine
+    container_name: workshop-customer-platform-nginx
+    ports:
+      - 80:80
+    restart: always
+    volumes:
+      - ./nginx/django.conf:/etc/nginx/conf.d/default.conf
+      - django-static:/static/django
+    depends_on:
+      - django
+
+  nginx-prometheus-exporter:
+    image: nginx/nginx-prometheus-exporter
+    container_name: workshop-customer-platform-nginx-exporter
+    ports:
+      - 9113:9113
+    command: -nginx.scrape-uri http://nginx/nginx/metrics
+    depends_on:
+      - nginx
